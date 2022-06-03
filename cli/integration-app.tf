@@ -15,5 +15,5 @@ db_host: "${module.db-vsi.PRIVATE-IP}"
 db_hostname: "${var.DB-HOSTNAME}"
 ...
     DOC
-  filename = "../ansible/sapnwapp-vars.yml"
+  filename = "ansible/sapnwapp-vars.yml"
 }

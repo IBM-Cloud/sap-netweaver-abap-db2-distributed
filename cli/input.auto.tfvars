@@ -2,12 +2,10 @@
 REGION			= "eu-de"
 ZONE			= "eu-de-2"
 VPC				= "ic4sap"                        # EXISTING Security group name
-SECURITYGROUP	= "ic4sap-securitygroup"      # EXISTING Security group name
+SECURITY_GROUP	= "ic4sap-securitygroup"      # EXISTING Security group name
 SUBNET			= "ic4sap-subnet"               # EXISTING Subnet name
-ADD_OPEN_PORTS = "no"                       # To create new open port/s on the EXISTING SECURITYGROUP, choose 'yes' or 'no' as options
-OPEN_PORT_MINIMUM = "3206"                  # This variables will be created only if ADD_OPEN_PORTS = "yes"
-OPEN_PORT_MAXIMUM = "3206"                  # This variables will be created only if ADD_OPEN_PORTS = "yes"
-SSH_KEYS                = [ "r010-57bfc315-f9e5-46bf-bf61-d87a24a9ce7a" , "r010-e372fc6f-4aef-4bdf-ade6-c4b7c1ad61ca" , "r010-09325e15-15be-474e-9b3b-21827b260717" , "r010-5cfdb578-fc66-4bf7-967e-f5b4a8d03b89" , "r010-7b85d127-7493-4911-bdb7-61bf40d3c7d4" , "r010-771e15dd-8081-4cca-8844-445a40e6a3b3" , "r010-d941534b-1d30-474e-9494-c26a88d4cda3" ]
+RESOURCE_GROUP  = "wes-automation"
+SSH_KEYS        = [ "r010-57bfc315-f9e5-46bf-bf61-d87a24a9ce7a" , "r010-e372fc6f-4aef-4bdf-ade6-c4b7c1ad61ca" , "r010-09325e15-15be-474e-9b3b-21827b260717" , "r010-5cfdb578-fc66-4bf7-967e-f5b4a8d03b89" , "r010-7b85d127-7493-4911-bdb7-61bf40d3c7d4" , "r010-771e15dd-8081-4cca-8844-445a40e6a3b3" , "r010-d941534b-1d30-474e-9494-c26a88d4cda3" ]
 
 # SAP Database VSI variables:
 DB-HOSTNAME		= "sapnwdb2mar8"

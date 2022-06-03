@@ -5,6 +5,6 @@ resource "null_resource" "sec-exec" {
     }
 
   provisioner "local-exec" {
-   command = "sleep 20; rm -rf  ../ansible/*-vars.yml"
+   command = "sleep 20; rm -rf  ansible/*-vars.yml"
   }
 }

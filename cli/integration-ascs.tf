@@ -24,5 +24,5 @@ kit_export_dir: "${var.kit_export_dir}"
 kit_db2client_dir: "${var.kit_db2client_dir}"
 ...
     DOC
-  filename = "../ansible/sapnwascs-vars.yml"
+  filename = "ansible/sapnwascs-vars.yml"
 }

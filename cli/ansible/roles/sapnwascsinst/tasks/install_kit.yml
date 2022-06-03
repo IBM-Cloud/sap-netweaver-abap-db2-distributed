@@ -1,99 +1,62 @@
 ---
-- name: Create /usr/sap/trans/kit directory
+- name: Create directories for SAP and DB2 kit on target
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: 0777
+  loop:
+    - "{{ sap_kit }}"
+    - "{{ sap_kit }}/swpm"
+    - "{{ sap_kit }}/export"
+    - "{{ sap_kit }}/db2client"
+
+- name: Gather the package facts for Ansible controller
+  package_facts:
+    manager: auto
+  delegate_to: localhost
+
+- name: Check if rsync package is available on Ansible controller
+  set_fact:
+    rsync_found_controller: true
+  when: "'rsync' in ansible_facts.packages"
+  delegate_to: localhost
+
+- name: Gather the package facts for target
+  package_facts:
+    manager: auto
+
+- name: Check if rsync package is available on target
+  set_fact:
+    rsync_found_target: true
+  when: "'rsync' in ansible_facts.packages"
+
+- name: Copy SAP and DB2 kit to target using rsync
+  synchronize:
+    src: "{{ item.saps_src }}"
+    dest: "{{ item.saps_dest }}"
+    checksum: yes
+  loop: "{{ saps_kit }}"
+  when: rsync_found_controller is defined and rsync_found_target is defined
+
+- name: Copy SAP and DB2 kit to target when rsync is not available
+  copy:
+    src: "{{ item.saps_src }}"
+    dest: "{{ item.saps_dest }}"
+    owner: root
+    group: root
+    mode: 0777
+  loop: "{{ saps_kit }}"
+  when: rsync_found_controller is not defined or rsync_found_target is not defined
+
+- name: Recursively change the ownership and permissions on the SAP kit directory
   file:
     path: "{{ sap_kit }}"
     state: directory
     mode: 0777
-
-- name: Create /usr/sap/trans/kit/swpm directory
-  file:
-    path: "{{ sap_kit }}/swpm"
-    state: directory
-    mode: 0777
-
-- name: Create /usr/sap/kit/export directory
-  file:
-    path: "{{ sap_kit }}/export"
-    state: directory
-    mode: 0777
-
-- name: Create /usr/sap/trans/kit/db2client directory
-  file:
-    path: "{{ sap_kit }}/db2client"
-    state: directory
-    mode: 0777
-
-- name: Copy "{{ kit_sapcar_file }}" kit to target
-  copy:
-    src: "{{ kit_sapcar_file }}"
-    dest: "{{ sap_kit }}/sapcar"
+    recurse: yes
     owner: root
     group: root
-    mode: 0777
-
-- name: Copy "{{ kit_swpm_file }}" kit to target
-  copy:
-    src: "{{ kit_swpm_file }}"
-    dest: "{{ sap_kit }}/swpm.sar"
-    owner: root
-    group: root
-    mode: 0777
-
-- name: Copy "{{ kit_saphotagent_file }}" kit to target
-  copy:
-    src: "{{ kit_saphotagent_file }}"
-    dest: "{{ sap_kit }}/saphotagent.sar"
-    owner: root
-    group: root
-    mode: 0777
-
-- name: Copy "{{ kit_sapexe_file }}" kit to target
-  copy:
-    src: "{{ kit_sapexe_file }}"
-    dest: "{{ sap_kit }}/sapexe.sar"
-    owner: root
-    group: root
-    mode: 0777
-
-- name: Copy "{{ kit_sapexedb_file }}" kit to target
-  copy:
-    src: "{{ kit_sapexedb_file }}"
-    dest: "{{ sap_kit }}/sapexedb.sar"
-    owner: root
-    group: root
-    mode: 0777
-
-- name: Copy "{{ kit_igsexe_file }}" kit to target
-  copy:
-    src: "{{ kit_igsexe_file }}"
-    dest: "{{ sap_kit }}/igsexe.sar"
-    owner: root
-    group: root
-    mode: 0777
-
-- name: Copy "{{ kit_igshelper_file }}" kit to target
-  copy:
-    src: "{{ kit_igshelper_file }}"
-    dest: "{{ sap_kit }}/igshelper.sar"
-    owner: root
-    group: root
-    mode: 0777
-
-- name: Copy "{{ kit_export_dir }}" kit to target
-  copy:
-    src: "{{ kit_export_dir }}/"
-    dest: "{{ sap_kit }}/export/"
-    owner: root
-    group: root
-    mode: 0777
-
-- name: Copy "{{ kit_db2client_dir }}" kit to target
-  copy:
-    src: "{{ kit_db2client_dir }}/"
-    dest: "{{ sap_kit }}/db2client/"
-    owner: root
-    group: root
-    mode: 0777
+  when: rsync_found_controller is defined and rsync_found_target is defined
 
 - name: Extract SWPM archive
   command: "{{ sap_kit }}/sapcar -xf {{ sap_kit }}/swpm.sar -R {{ sap_kit }}/swpm"

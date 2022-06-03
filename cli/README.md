@@ -27,11 +27,9 @@ Edit your VPC, Subnet, Security group, Hostname, Profile, Image, SSH Keys like s
 REGION			 = "eu-de"
 ZONE			= "eu-de-2"
 VPC			= "sap"                         # EXISTING VPC name
-SECURITYGROUP	= "sap-securitygroup"   # EXISTING Security group name
+SECURITY_GROUP	= "sap-securitygroup"   # EXISTING Security group name
 SUBNET			= "sap-subnet"               # EXISTING Subnet name
-ADD_OPEN_PORTS = "no"                 # To create new open port/s on the EXISTING SECURITYGROUP, choose 'yes' or 'no' as options
-OPEN_PORT_MINIMUM = "3200"            # This variables will be created only if ADD_OPEN_PORTS = "yes"
-OPEN_PORT_MAXIMUM = "3200"            # This variables will be created only if ADD_OPEN_PORTS = "yes"
+RESOURCE_GROUP  = "wes-automation"           # EXISTING Resource Group
 SSH_KEYS		= [ "r010-57bfc315-f9e5-46bf-bf61-d87a24a9ce7a" , "r010-3fcd9fe7-d4a7-41ce-8bb3-d96e936b2c7e" ]
 
 # SAP Database VSI variables:
@@ -53,10 +51,8 @@ REGION | The cloud region where to deploy the solution. <br /> The regions and z
 ZONE | The cloud zone where to deploy the solution. <br /> Sample value: eu-de-2.
 VPC | EXISTING VPC name. The list of VPCs is available [here](https://cloud.ibm.com/vpc-ext/network/vpcs)
 SUBNET | EXISTING Subnet name. The list of Subnets is available [here](https://cloud.ibm.com/vpc-ext/network/subnets). 
-SECURITYGROUP | EXISTING Security group name. The list of Security Groups is available [here](https://cloud.ibm.com/vpc-ext/network/securityGroups). 
-ADD_OPEN_PORTS | To create new open port/s on the EXISTING SECURITYGROUP, choose 'yes' or 'no' as options.
-OPEN_PORT_MINIMUM | (Required, Integer) The TCP port range that includes the minimum bound. Valid values are from 1 to 65535.<br /> Default value: 3200
-OPEN_PORT_MAXIMUM | (Required, Integer) The TCP port range that includes the maximum bound. Valid values are from 1 to 65535.<br /> Default value: 3200.
+SECURITY_GROUP | EXISTING Security group name. The list of Security Groups is available [here](https://cloud.ibm.com/vpc-ext/network/securityGroups).
+RESOURCE_GROUP | EXISTING Resource Group name. The list of Resource Groups is available [here](https://cloud.ibm.com/account/resource-groups).
 [DB/APP]-HOSTNAME | The Hostname for the VSI. The hostname must have up to 13 characters as required by SAP.<br> For more information on rules regarding hostnames for SAP systems, check [SAP Note 611361: Hostnames of SAP ABAP Platform servers](https://launchpad.support.sap.com/#/notes/%20611361)
 [DB/APP]-PROFILE | The profile used for the VSI. A list of profiles is available [here](https://cloud.ibm.com/docs/vpc?topic=vpc-profiles).<br> For more information about supported DB/OS and IBM Gen 2 Virtual Server Instances (VSI), check [SAP Note 2927211: SAP Applications on IBM Virtual Private Cloud](https://launchpad.support.sap.com/#/notes/2927211)
 [DB/APP]-IMAGE | The OS image used for the VSI. A list of images is available [here](https://cloud.ibm.com/docs/vpc?topic=vpc-about-images)
@@ -109,7 +105,7 @@ sap_master_password | Common password for all users that are created during the 
 **Obs***: <br />
 - Sensitive - The variable value is not displayed in your tf files details after terrafrorm plan&apply commands.<br />
 - VOL[number] | The sizes for the disks in GB that are to be attached to the VSI and used by SAP.<br />
-- The following variables should be the same like the bastion ones: REGION, ZONE, VPC, SUBNET, SECURITYGROUP.
+- The following variables should be the same like the bastion ones: REGION, ZONE, VPC, SUBNET, RESOURCE_GROUP, SECURITY_GROUP.
 
 ## VPC Configuration
 
