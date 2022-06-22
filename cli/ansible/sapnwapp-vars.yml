@@ -6,7 +6,7 @@
 sap_sid: "NWA"
 sap_ascs_instance_number: "01"
 sap_ci_instance_number: "00"
-sap_master_password: ""
+sap_main_password: ""
 db_host: ""
 db_hostname: "sapnwdb"
 ...

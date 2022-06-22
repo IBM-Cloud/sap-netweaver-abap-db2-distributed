@@ -7,7 +7,7 @@ sap_sid: "NWA"
 sap_host: ""
 sap_hostname: "sapnwapp"
 sap_ascs_instance_number: "01"
-sap_master_password: ""
+sap_main_password: ""
 
 #SAP Installation kit path
 kit_sapcar_file: "/storage/NW75DB2/SAPCAR_1010-70006178.EXE"

@@ -95,12 +95,12 @@ kit_export_dir | Path to NW 7.5 Installation Export dir | The archive downloaded
 kit_db2_dir | Path to DB2 LUW 10.5 FP7SAP2 Linux on x86_64 64bit dir | The archive downloaded from SAP Support Portal must be extracted and the path provided to this parameter must contain LABEL.ASC file
 kit_db2client_dir | Path to DB2 LUW 10.5 FP7SAP2 RDBMS Client dir | The archive downloaded from SAP Support Portal must be extracted and the path provided to this parameter must contain LABEL.ASC file
 
-**SAP Master Password**
+**SAP Main Password**
 The password for the SAP system will be asked interactively during terraform plan step and will not be available after the deployment.
 
 Parameter | Description | Requirements
 ----------|-------------|-------------
-sap_master_password | Common password for all users that are created during the installation | <ul><li>It must be 8 to 14 characters long</li><li>It must contain at least one digit (0-9)</li><li>It must not contain \ (backslash) and " (double quote)</li></ul>
+sap_main_password | Common password for all users that are created during the installation | <ul><li>It must be 8 to 14 characters long</li><li>It must contain at least one digit (0-9)</li><li>It must not contain \ (backslash) and " (double quote)</li></ul>
 
 **Obs***: <br />
 - Sensitive - The variable value is not displayed in your tf files details after terrafrorm plan&apply commands.<br />
@@ -141,7 +141,7 @@ For planning phase:
 
 ```shell
 terraform plan --out plan1
-# you will be asked for the following sensitive variables: 'ibmcloud_api_key'  and  'sap_master_password'.
+# you will be asked for the following sensitive variables: 'ibmcloud_api_key'  and  'sap_main_password'.
 ```
 
 For apply phase:
@@ -155,7 +155,7 @@ For destroy:
 ```shell
 terraform destroy
 # you will be asked for the following sensitive variables as a destroy confirmation phase:
-'ibmcloud_api_key'  and  'sap_master_password'.
+'ibmcloud_api_key'  and  'sap_main_password'.
 ```
 
 
