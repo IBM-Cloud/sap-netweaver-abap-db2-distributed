@@ -1,0 +1,6 @@
+---
+- name: Change the value of {{ db2_var }} variable to {{ db2_var_newval }}
+  shell: "su - db2{{ sap_sid|lower }} -c 'db2set {{ db2_var|upper }}={{ db2_var_newval }}'"
+  register: db2_cmd
+  when: db2_var is defined and db2_var_newval is defined
+...

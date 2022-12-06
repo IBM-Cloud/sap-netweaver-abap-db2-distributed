@@ -1,5 +1,5 @@
 ---
-- name: Create directories for SAP and DB2 kit on target
+- name: Create directories for SAP kit on target
   file:
     path: "{{ item }}"
     state: directory
@@ -21,16 +21,24 @@
   when: "'rsync' in ansible_facts.packages"
   delegate_to: localhost
 
-- name: Gather the package facts for target
+- name: Gather the package facts for Red Hat target
   package_facts:
     manager: auto
+  when: ansible_facts['os_family'] == "RedHat"
+
+- name: Gather the packages for Suse target
+  shell: zypper search -i --match-exact rsync
+  args:
+    warn: false
+  register: rsync_search_result
+  when: ansible_facts['os_family'] == "Suse"
 
 - name: Check if rsync package is available on target
   set_fact:
     rsync_found_target: true
-  when: "'rsync' in ansible_facts.packages"
+  when: ansible_facts['os_family'] == "RedHat" and "'rsync' in ansible_facts.packages" or ansible_facts['os_family'] == "Suse" and rsync_search_result.rc == 0
 
-- name: Copy SAP and DB2 kit to target using rsync
+- name: Copy SAP kit to target using rsync
   synchronize:
     src: "{{ item.saps_src }}"
     dest: "{{ item.saps_dest }}"
@@ -38,7 +46,7 @@
   loop: "{{ saps_kit }}"
   when: rsync_found_controller is defined and rsync_found_target is defined
 
-- name: Copy SAP and DB2 kit to target when rsync is not available
+- name: Copy SAP kit to target when rsync is not available
   copy:
     src: "{{ item.saps_src }}"
     dest: "{{ item.saps_dest }}"
@@ -58,6 +66,12 @@
     group: root
   when: rsync_found_controller is defined and rsync_found_target is defined
 
+- name: Check if SWPM archive content was already extracted
+  stat:
+    path: "{{ sap_kit }}/swpm/sapinst"
+  register: file_status_asc
+
 - name: Extract SWPM archive
   command: "{{ sap_kit }}/sapcar -xf {{ sap_kit }}/swpm.sar -R {{ sap_kit }}/swpm"
-...   
+  when: not file_status_asc.stat.exists
+...

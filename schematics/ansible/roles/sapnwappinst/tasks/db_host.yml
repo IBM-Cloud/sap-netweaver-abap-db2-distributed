@@ -1,6 +1,28 @@
 ---
-- name: Enable hostname resolve for the db server 
+- name: Get short hostname
+  command: hostname -s
+  register: sap_short_hostname
+  changed_when: False
+
+- name: Get FQDN
+  set_fact:
+    sap_host_fqdn: "{{ ansible_fqdn }}"
+
+- name: Get the domain
+  set_fact:
+    domain: "{{ sap_host_fqdn.split(sap_short_hostname)[1] }}"
+  when: sap_short_hostname.stdout != sap_host_fqdn
+
+- name: Enable hostname resolve for the database server if FQDN is set
+  lineinfile:
+    path: /etc/hosts
+    line: "{{ db_host }} {{ db_hostname }}{{ domain }} {{ db_hostname }}"
+  when: sap_short_hostname.stdout != sap_host_fqdn
+
+- name: Enable hostname resolve for the database server if FQDN is not set
   lineinfile:
     path: /etc/hosts
     line: "{{ db_host }} {{ db_hostname }}"
+  when: sap_short_hostname.stdout == sap_host_fqdn
+
 ...

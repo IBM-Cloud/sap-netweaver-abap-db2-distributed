@@ -12,6 +12,7 @@ sap_host: "${module.app-vsi.PRIVATE-IP}"
 sap_hostname: "${var.APP-HOSTNAME}"
 sap_ascs_instance_number: "${var.sap_ascs_instance_number}"
 sap_main_password: "${var.sap_main_password}"
+db_profile: "${var.DB-PROFILE}"
 
 #SAP Installation kit path
 kit_sapcar_file: "${var.kit_sapcar_file}"

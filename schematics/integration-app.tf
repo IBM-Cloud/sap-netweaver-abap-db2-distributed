@@ -13,6 +13,7 @@ sap_ci_instance_number: "${var.sap_ci_instance_number}"
 sap_main_password: "${var.sap_main_password}"
 db_host: "${module.db-vsi.PRIVATE-IP}"
 db_hostname: "${var.DB-HOSTNAME}"
+sap_profile: "${var.APP-PROFILE}"
 ...
     DOC
   filename = "ansible/sapnwapp-vars.yml"

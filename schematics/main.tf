@@ -32,7 +32,7 @@ module "db-vsi" {
   PROFILE		= var.DB-PROFILE
   IMAGE			= var.DB-IMAGE
   SSH_KEYS		= var.SSH_KEYS
-  VOLUME_SIZES	= [ "32" , "32", "64", "128", "256" ]
+  VOLUME_SIZES	= [ "40" , "32", "64", "128", "256" ]
   VOL_PROFILE		= "10iops-tier"
 }
 
@@ -66,6 +66,15 @@ module "db-ansible-exec" {
   depends_on	= [ module.ascs-ansible-exec, module.db-vsi , local_file.db_ansible_sapnwdb-vars ]
   IP			= module.db-vsi.PRIVATE-IP
   PLAYBOOK = "sapnwdb.yml"
+  BASTION_FLOATING_IP = var.BASTION_FLOATING_IP
+  private_ssh_key = var.private_ssh_key
+}
+
+module "db-ansible-wa-exec" {
+  source		= "./modules/ansible-exec"
+  depends_on	= [ module.app-ansible-exec, module.db-vsi , local_file.db_ansible_sapnwdb-vars ]
+  IP			= module.db-vsi.PRIVATE-IP
+  PLAYBOOK = "sapnwdb_wa.yml"
   BASTION_FLOATING_IP = var.BASTION_FLOATING_IP
   private_ssh_key = var.private_ssh_key
 }

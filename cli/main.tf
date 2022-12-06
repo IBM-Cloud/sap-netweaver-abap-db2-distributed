@@ -17,7 +17,7 @@ module "db-vsi" {
   PROFILE		= var.DB-PROFILE
   IMAGE			= var.DB-IMAGE
   SSH_KEYS		= var.SSH_KEYS
-  VOLUME_SIZES	= [ "32" , "32", "64", "128", "256" ]
+  VOLUME_SIZES	= [ "40" , "32", "64", "128", "256" ]
   VOL_PROFILE		= "10iops-tier"
 }
 
@@ -57,9 +57,16 @@ module "app-ansible-exec" {
   PLAYBOOK_PATH = "ansible/sapnwapp.yml"
 }
 
+module "db-ansible-wa-exec" {
+  source		= "./modules/ansible-exec"
+  depends_on	= [ module.app-ansible-exec, module.db-vsi , local_file.db_ansible_sapnwdb-vars ]
+  IP			= module.db-vsi.PRIVATE-IP
+  PLAYBOOK_PATH = "ansible/sapnwdb_wa.yml"
+}
+
 module "sec-exec" {
   source		= "./modules/sec-exec"
-  depends_on	= [ module.app-ansible-exec ]
+  depends_on	= [ module.db-ansible-wa-exec ]
   IP			= module.app-vsi.PRIVATE-IP
   sap_main_password = var.sap_main_password
 }
