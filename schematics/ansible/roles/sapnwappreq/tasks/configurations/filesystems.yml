@@ -13,17 +13,18 @@
 
 - name: Get the disk for swap
   ansible.builtin.set_fact:
-    swap_disk: "{{ device.key }}"
-    disk_ids: "{{ disk_ids + [device.key]  }}"
-  loop: "{{ lookup('ansible.builtin.dict', ansible_devices) }}"
+    swap_disk: "{{ device }}"
+    disk_ids: "{{ disk_ids + [device]  }}"
+  loop: "{{ ansible_devices.keys() | list }}"
   loop_control:
     loop_var: device
   when:
-    - not device.value.partitions
-    - not device.value.holders
-    - device.value.size == swap_disk_size
-    - 'device.key not in disk_ids'
-    - not (swap_disk is defined and swap_disk | length > 0)
+    - device | regex_search("dm-") is none
+    - ansible_devices[device].partitions.keys() | length == 0
+    - (ansible_devices[device].holders | length == 0) or (ansible_devices[device].holders[0] | regex_search("_swap_") is not none)
+    - ansible_devices[device].links.labels | length == 0
+    - ansible_devices[device].size == swap_disk_size
+    - 'device not in disk_ids'
 
 - name: Check if the required storage device for swap is found
   fail:
@@ -38,17 +39,18 @@
 
 - name: Get the disk for SAP instance
   ansible.builtin.set_fact:
-    sap_disk: "{{ device.key }}"
-    disk_ids: "{{ disk_ids + [device.key]  }}"
-  loop: "{{ lookup('ansible.builtin.dict', ansible_devices) }}"
+    sap_disk: "{{ device }}"
+    disk_ids: "{{ disk_ids + [device]  }}"
+  loop: "{{ ansible_devices.keys() | list }}"
   loop_control:
     loop_var: device
   when:
-    - not device.value.partitions
-    - not device.value.holders
-    - device.value.size == sap_disk_size
-    - 'device.key not in disk_ids'
-    - not (sap_disk is defined and sap_disk | length > 0)
+    - device | regex_search("dm-") is none
+    - ansible_devices[device].partitions.keys() | length == 0
+    - (ansible_devices[device].holders | length == 0) or (ansible_devices[device].holders[0] | regex_search("_app_") is not none)
+    - ansible_devices[device].links.labels | length == 0
+    - ansible_devices[device].size == sap_disk_size
+    - 'device not in disk_ids'
 
 - name: Check if the required storage device for SAP instance is found
   fail:

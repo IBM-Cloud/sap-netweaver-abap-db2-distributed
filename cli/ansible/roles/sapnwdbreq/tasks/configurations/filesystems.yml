@@ -13,17 +13,18 @@
 
 - name: Get the disk for swap
   ansible.builtin.set_fact:
-    swap_disk: "{{ device.key }}"
-    disk_ids: "{{ disk_ids + [device.key]  }}"
-  loop: "{{ lookup('ansible.builtin.dict', ansible_devices) }}"
+    swap_disk: "{{ device }}"
+    disk_ids: "{{ disk_ids + [device]  }}"
+  loop: "{{ ansible_devices.keys() | list }}"
   loop_control:
     loop_var: device
   when:
-    - not device.value.partitions
-    - not device.value.holders
-    - device.value.size == swap_disk_size
-    - 'device.key not in disk_ids'
-    - not (swap_disk is defined and swap_disk | length > 0)
+    - device | regex_search("dm-") is none
+    - ansible_devices[device].partitions.keys() | length == 0
+    - (ansible_devices[device].holders | length == 0) or (ansible_devices[device].holders[0] | regex_search("_swap_") is not none)
+    - ansible_devices[device].links.labels | length == 0
+    - ansible_devices[device].size == swap_disk_size
+    - 'device not in disk_ids'
 
 - name: Check if the required storage device for swap is found
   fail:
@@ -38,17 +39,18 @@
 
 - name: Get the disk for SAP instance
   ansible.builtin.set_fact:
-    sap_disk: "{{ device.key }}"
-    disk_ids: "{{ disk_ids + [device.key]  }}"
-  loop: "{{ lookup('ansible.builtin.dict', ansible_devices) }}"
+    sap_disk: "{{ device }}"
+    disk_ids: "{{ disk_ids + [device]  }}"
+  loop: "{{ ansible_devices.keys() | list }}"
   loop_control:
     loop_var: device
   when:
-    - not device.value.partitions
-    - not device.value.holders
-    - device.value.size == sap_disk_size
-    - 'device.key not in disk_ids'
-    - not (sap_disk is defined and sap_disk | length > 0)
+    - device | regex_search("dm-") is none
+    - ansible_devices[device].partitions.keys() | length == 0
+    - (ansible_devices[device].holders | length == 0) or (ansible_devices[device].holders[0] | regex_search("_app_") is not none)
+    - ansible_devices[device].links.labels | length == 0
+    - ansible_devices[device].size == sap_disk_size
+    - 'device not in disk_ids'
 
 - name: Check if the required storage device for SAP instance is found
   fail:
@@ -63,17 +65,18 @@
 
 - name: Get the disk for DB2 data
   ansible.builtin.set_fact:
-    data_disk: "{{ device.key }}"
-    disk_ids: "{{ disk_ids + [device.key]  }}"
-  loop: "{{ lookup('ansible.builtin.dict', ansible_devices) }}"
+    data_disk: "{{ device }}"
+    disk_ids: "{{ disk_ids + [device]  }}"
+  loop: "{{ ansible_devices.keys() | list }}"
   loop_control:
     loop_var: device
   when:
-    - not device.value.partitions
-    - not device.value.holders
-    - device.value.size == data_disk_size
-    - 'device.key not in disk_ids'
-    - not (data_disk is defined and data_disk | length > 0)
+    - device | regex_search("dm-") is none
+    - ansible_devices[device].partitions.keys() | length == 0
+    - (ansible_devices[device].holders | length == 0) or (ansible_devices[device].holders[0] | regex_search("_data_") is not none)
+    - ansible_devices[device].links.labels | length == 0
+    - ansible_devices[device].size == data_disk_size
+    - 'device not in disk_ids'
 
 - name: Check if the required storage device for DB2 data is found
   fail:
@@ -88,17 +91,18 @@
 
 - name: Get the disk for DB2 logs
   ansible.builtin.set_fact:
-    log_disk: "{{ device.key }}"
-    disk_ids: "{{ disk_ids + [device.key]  }}"
-  loop: "{{ lookup('ansible.builtin.dict', ansible_devices) }}"
+    log_disk: "{{ device }}"
+    disk_ids: "{{ disk_ids + [device]  }}"
+  loop: "{{ ansible_devices.keys() | list }}"
   loop_control:
     loop_var: device
   when:
-    - not device.value.partitions
-    - not device.value.holders
-    - device.value.size == log_disk_size
-    - 'device.key not in disk_ids'
-    - not (log_disk is defined and log_disk | length > 0)
+    - device | regex_search("dm-") is none
+    - ansible_devices[device].partitions.keys() | length == 0
+    - (ansible_devices[device].holders | length == 0) or (ansible_devices[device].holders[0] | regex_search("_log_") is not none)
+    - ansible_devices[device].links.labels | length == 0
+    - ansible_devices[device].size == log_disk_size
+    - 'device not in disk_ids'
 
 - name: Check if the required storage device for DB2 logs is found
   fail:
@@ -113,17 +117,18 @@
 
 - name: Get the disk for DB2 log archives
   ansible.builtin.set_fact:
-    arch_disk: "{{ device.key }}"
-    disk_ids: "{{ disk_ids + [device.key]  }}"
-  loop: "{{ lookup('ansible.builtin.dict', ansible_devices) }}"
+    arch_disk: "{{ device }}"
+    disk_ids: "{{ disk_ids + [device]  }}"
+  loop: "{{ ansible_devices.keys() | list }}"
   loop_control:
     loop_var: device
   when:
-    - not device.value.partitions
-    - not device.value.holders
-    - device.value.size == arch_disk_size
-    - 'device.key not in disk_ids'
-    - not (arch_disk is defined and arch_disk | length > 0)
+    - device | regex_search("dm-") is none
+    - ansible_devices[device].partitions.keys() | length == 0
+    - (ansible_devices[device].holders | length == 0) or (ansible_devices[device].holders[0] | regex_search("_arch_") is not none)
+    - ansible_devices[device].links.labels | length == 0
+    - ansible_devices[device].size == arch_disk_size
+    - 'device not in disk_ids'
 
 - name: Check if the required storage device for DB2 log archives is found
   fail:

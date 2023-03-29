@@ -157,7 +157,7 @@ variable "kit_sapcar_file" {
 variable "kit_swpm_file" {
 	type		= string
 	description = "kit_swpm_file"
-	default		= "SWPM20SP09_4-80003424.SAR"
+	default		= "SWPM10SP37_2-20009701.SAR"
 }
 
 variable "kit_sapexe_file" {

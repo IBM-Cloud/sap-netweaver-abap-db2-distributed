@@ -6,7 +6,7 @@ This automation solution is designed for the deployment of  **Three Tiers SAP Ne
 The solution is based on Terraform remote-exec and Ansible playbooks executed by Schematics and it is implementing a 'reasonable' set of best practices for SAP VSI host configuration.
 
 **It contains:**
-- Terraform scripts for the deployment of two VSIs, in an EXISTING VPC, with Subnet and Security Group. TThe VSIs are intended to be used: one for the DB2 instance and one for ASCS and PAS instances.
+- Terraform scripts for the deployment of two VSIs, in an EXISTING VPC, with Subnet and Security Group. TThe VSIs are intended to be used: one for the DB2 instance and one for ASCS and PAS instances. The Terraform version used for deployment should be >= 1.3.6. Note: The deployment was tested with Terraform 1.3.6
 - Bash scripts used for the checking of the prerequisites required by SAP VSI deployment and for the integration into a single step in IBM Schematics GUI of the VSI provisioning and the **Three Tiers SAP Netweaver ABAP Stack with DB2** installation.
 - Ansible scripts to configure SAP Netweaver PAS, ASCS and DB2 installations.
 Please note that Ansible is started by Terraform and must be available on the same host.

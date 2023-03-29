@@ -6,7 +6,7 @@ This automation solution is designed for the deployment of  **Three Tiers SAP Ne
 The solution is based on Terraform scripts and Ansible playbooks executed in CLI and it is implementing a 'reasonable' set of best practices for SAP VSI host configuration.
 
 **It contains:**
-- Terraform scripts for the deployment of two VSIs, in an EXISTING VPC, with Subnet and Security Group. The VSIs are intended to be used: one for the DB2 instance and one for ASCS and PAS instances.
+- Terraform scripts for the deployment of two VSIs, in an EXISTING VPC, with Subnet and Security Group. The VSIs are intended to be used: one for the DB2 instance and one for ASCS and PAS instances. The Terraform version used for deployment should be >= 1.3.6. Note: The deployment was tested with Terraform 1.3.6
 - Ansible scripts to configure SAP Netweaver PAS, ASCS and DB2 installations.
 Please note that Ansible is started by Terraform and must be available on the same host.
 
@@ -142,7 +142,7 @@ sap_ci_instance_number = "00"
 ##########################################################
 
 kit_sapcar_file = "/storage/NW75DB2/SAPCAR_1010-70006178.EXE"
-kit_swpm_file =  "/storage/NW75DB2/SWPM10SP31_7-20009701.SAR"
+kit_swpm_file = "/storage/NW75DB2/SWPM10SP37_2-20009701.SAR"
 kit_saphotagent_file = "/storage/NW75DB2/SAPHOSTAGENT51_51-20009394.SAR"
 kit_sapexe_file = "/storage/NW75DB2/SAPEXE_800-80002573.SAR"
 kit_sapexedb_file = "/storage/NW75DB2/SAPEXEDB_800-80002603.SAR"

@@ -167,7 +167,7 @@ variable "kit_sapcar_file" {
 variable "kit_swpm_file" {
 	type		= string
 	description = "kit_swpm_file"
-	default		= "/storage/NW75DB2/SWPM10SP31_7-20009701.SAR"
+	default		= "/storage/NW75DB2/SWPM10SP37_2-20009701.SAR"
 }
 
 variable "kit_saphotagent_file" {
