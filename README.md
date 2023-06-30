@@ -1,7 +1,7 @@
 # Three Tiers SAP Netweaver ABAP Stack with DB2 Deployment
 
 ## Description
-This automation solution is designed for the deployment of [**Three Tiers SAP Netweaver ABAP Stack with DB2**](https://cloud.ibm.com/docs/sap?topic=sap-sap-terraform-3tier-nw-db2&interface=ui). The SAP solution will be deployed on top of one of the following Operating Systems: **SUSE Linux Enterprise Server 15 SP 3 for SAP**, **Red Hat Enterprise Linux 8.4 for SAP**, **Red Hat Enterprise Linux 7.6 for SAP** in an existing IBM Cloud Gen2 VPC, using an existing [bastion host with secure remote SSH access](https://github.com/IBM-Cloud/sap-bastion-setup).
+This automation solution is designed for the deployment of [**Three Tiers SAP Netweaver ABAP Stack with DB2**](https://cloud.ibm.com/docs/sap?topic=sap-sap-terraform-3tier-nw-db2&interface=ui). The SAP solution will be deployed on top of one of the following Operating Systems: **SUSE Linux Enterprise Server 15 SP 3 for SAP**, **SUSE Linux Enterprise Server 15 SP 4 for SAP**,  **Red Hat Enterprise Linux 8.4 for SAP**, **Red Hat Enterprise Linux 8.6 for SAP** in an existing IBM Cloud Gen2 VPC, using an existing [bastion host with secure remote SSH access](https://github.com/IBM-Cloud/sap-bastion-setup).
 
 
 ## Contents:
@@ -16,7 +16,7 @@ This automation solution is designed for the deployment of [**Three Tiers SAP Ne
 
 
 ## 1.1 Installation media
-SAP installation media used for this deployment is the default one for **SAP Netweaver 7.5** with **Db2 11.5.6 FP0** on Red Hat 8.4 and Suse 15 SP3 or **Db2 10.5FP7** on Red Hat 7.6, available at SAP Support Portal under *INSTALLATION AND UPGRADE* area and it has to be provided manually at the "input parameter" section.
+SAP installation media used for this deployment is the default one for **SAP Netweaver 7.5** with **Db2 11.5.6 FP0** on Red Hat 8.4, 8.6 and Suse 15 SP3, SP4 , available at SAP Support Portal under *INSTALLATION AND UPGRADE* area and it has to be provided manually at the "input parameter" section.
 
 ## 1.2 VSI Configuration
 The VSIs are deployed with one of the following Operating Systems: Suse Enterprise Linux 15 SP3 for SAP Applications (amd64), Red Hat Enterprise Linux 8.4 for SAP Applications (amd64), Red Hat Enterprise Linux 7.6 for SAP Applications (amd64). The SSH keys are configured to allow root user access. The following storage volumes are creating during the provisioning:
@@ -88,10 +88,10 @@ SUBNET | The name of an EXISTING Subnet. The list of Subnets is available [here]
 SECURITY_GROUP | The name of an EXISTING Security group. The list of Security Groups is available [here](https://cloud.ibm.com/vpc-ext/network/securityGroups).
 DB-HOSTNAME | The Hostname for the DB VSI. The hostname must have up to 13 characters as required by SAP. For more information on rules regarding hostnames for SAP systems, check SAP Note *611361 - Hostnames of SAP ABAP Platform servers*
 DB-PROFILE |  The profile used for the DB VSI. A list of profiles is available [here](https://cloud.ibm.com/docs/vpc?topic=vpc-profiles) <br>  For more information about supported DB/OS and IBM Gen 2 Virtual Server Instances (VSI), check [SAP Note 2927211: SAP Applications on IBM Virtual Private Cloud](https://launchpad.support.sap.com/#/notes/2927211) <br /> Default value: "bx2-4x16"
-DB-IMAGE | The OS image used for the VSI. A list of images is available [here](https://cloud.ibm.com/docs/vpc?topic=vpc-about-images).<br /> Supported images: ibm-sles-15-3-amd64-sap-applications-5, ibm-redhat-8-4-amd64-sap-applications-4, ibm-redhat-7-6-amd64-sap-applications-3. Default value: ibm-redhat-8-4-amd64-sap-applications-4
+DB-IMAGE | The OS image used for the VSI. A list of images is available [here](https://cloud.ibm.com/docs/vpc?topic=vpc-about-images).<br /> Supported images: ibm-sles-15-3-amd64-sap-applications-5, ibm-sles-15-4-amd64-sap-applications-4, ibm-redhat-8-4-amd64-sap-applications-4, ibm-redhat-8-6-amd64-sap-applications-2. Default value: ibm-redhat-8-6-amd64-sap-applications-2
 APP-HOSTNAME | The Hostname for the DB VSI. The hostname must have up to 13 characters as required by SAP. For more information on rules regarding hostnames for SAP systems, check SAP Note *611361 - Hostnames of SAP ABAP Platform servers*
 APP-PROFILE |  The profile used for the APP VSI. A list of profiles is available [here](https://cloud.ibm.com/docs/vpc?topic=vpc-profiles) <br>  For more information about supported DB/OS and IBM Gen 2 Virtual Server Instances (VSI), check [SAP Note 2927211: SAP Applications on IBM Virtual Private Cloud](https://launchpad.support.sap.com/#/notes/2927211) <br /> Default value: "bx2-4x16"
-APP-IMAGE | The OS image used for the APP VSI. A list of images is available [here](https://cloud.ibm.com/docs/vpc?topic=vpc-about-images).<br /> Supported images: ibm-sles-15-3-amd64-sap-applications-5, ibm-redhat-8-4-amd64-sap-applications-4, ibm-redhat-7-6-amd64-sap-applications-3. Default value: ibm-redhat-8-4-amd64-sap-applications-4
+APP-IMAGE | The OS image used for the APP VSI. A list of images is available [here](https://cloud.ibm.com/docs/vpc?topic=vpc-about-images).<br /> Supported images: ibm-sles-15-3-amd64-sap-applications-5, ibm-sles-15-4-amd64-sap-applications-4, ibm-redhat-8-4-amd64-sap-applications-4, ibm-redhat-8-6-amd64-sap-applications-2. Default value: ibm-redhat-8-6-amd64-sap-applications-2
 
 **SAP input parameters:**
 
@@ -109,8 +109,8 @@ kit_sapexedb_file | Path to SAP Kernel DB archive (SAR) | As downloaded from SAP
 kit_igsexe_file | Path to IGS archive (SAR) | As downloaded from SAP Support Portal
 kit_igshelper_file | Path to IGS Helper archive (SAR) | As downloaded from SAP Support Portal
 kit_export_dir | Path to NW 7.5 Installation Export dir | The archive downloaded from SAP Support Portal must be extracted and the path provided to this parameter must contain LABEL.ASC file
-kit_db2_dir | Path to DB2 LUW 11.5 MP6 FP0 SAP2 Linux on x86_64 64bit dir for Red Hat 8.4 and Suse 15 SP3 and path to DB2 LUW 10.5 FP7SAP2 Linux on x86_64 64bit dir for Red Hat 7.6 | The archive downloaded from SAP Support Portal must be extracted and the path provided to this parameter must contain LABEL.ASC file. Default value: /storage/NW75DB2/51055138/DB2_FOR_LUW_11.5_MP6_FP0SAP2_LINUX_
-kit_db2client_dir | Path to DB2 LUW 11.5 MP6 FP0 SAP2 RDBMS Client dir for Red Hat 8.4 and Suse 15 SP3 and path to DB2 LUW 10.5 FP7SAP2 RDBMS Client dir for Red Hat 7.6 | The archive downloaded from SAP Support Portal must be extracted and the path provided to this parameter must contain LABEL.ASC file. Default value: /storage/NW75DB2/51055140
+kit_db2_dir | Path to DB2 LUW 11.5 MP6 FP0 SAP2 Linux on x86_64 64bit dir for Red Hat 8.4, 8.6 and Suse 15 SP3, SP4 | The archive downloaded from SAP Support Portal must be extracted and the path provided to this parameter must contain LABEL.ASC file. Default value: /storage/NW75DB2/51055138/DB2_FOR_LUW_11.5_MP6_FP0SAP2_LINUX_
+kit_db2client_dir | Path to DB2 LUW 11.5 MP6 FP0 SAP2 RDBMS Client dir for Red Hat 8.4, 8.6 and Suse 15 SP3, SP4 | The archive downloaded from SAP Support Portal must be extracted and the path provided to this parameter must contain LABEL.ASC file. Default value: /storage/NW75DB2/51055140
 
 **Obs***: <br />
 - Sensitive - The variable value is not displayed in your Schematics logs and it is hidden in the input field.<br />
@@ -225,8 +225,8 @@ DB-HOSTNAME = "ic4sapdb2"
 DB-PROFILE = "bx2-4x16"
 # The DB VSI profile. Supported profiles for DB VSI: bx2-4x16. The list of available profiles: https://cloud.ibm.com/docs/vpc?topic=vpc-profiles&interface=ui
 
-DB-IMAGE = "ibm-redhat-8-4-amd64-sap-applications-4"
-# OS image for DB VSI. Supported OS images for DB VSIs: ibm-sles-15-3-amd64-sap-applications-5, ibm-redhat-8-4-amd64-sap-applications-4, ibm-redhat-7-6-amd64-sap-applications-3.
+DB-IMAGE = "ibm-redhat-8-6-amd64-sap-applications-2"
+# OS image for DB VSI. Supported OS images for DB VSIs: ibm-sles-15-3-amd64-sap-applications-5, ibm-sles-15-4-amd64-sap-applications-4, ibm-redhat-8-4-amd64-sap-applications-4, ibm-redhat-8-6-amd64-sap-applications-2.
 # The list of available VPC Operating Systems supported by SAP: SAP note '2927211 - SAP Applications on IBM Virtual Private Cloud (VPC) Infrastructure environment' https://launchpad.support.sap.com/#/notes/2927211; The list of all available OS images: https://cloud.ibm.com/docs/vpc?topic=vpc-about-images
 # Example: DB-IMAGE = "ibm-redhat-8-4-amd64-sap-applications-4" 
 
@@ -241,8 +241,8 @@ APP-HOSTNAME = "ic4sapapp"
 APP-PROFILE = "bx2-4x16"
 # The APP VSI profile. Supported profiles: bx2-4x16. The list of available profiles: https://cloud.ibm.com/docs/vpc?topic=vpc-profiles&interface=ui
 
-APP-IMAGE = "ibm-redhat-8-4-amd64-sap-applications-4"
-# OS image for SAP APP VSI. Supported OS images for APP VSIs: ibm-sles-15-3-amd64-sap-applications-5, ibm-redhat-8-4-amd64-sap-applications-4, ibm-redhat-7-6-amd64-sap-applications-3.
+APP-IMAGE = "ibm-redhat-8-6-amd64-sap-applications-2"
+# OS image for SAP APP VSI. Supported OS images for APP VSIs: ibm-sles-15-3-amd64-sap-applications-5, ibm-sles-15-4-amd64-sap-applications-4, ibm-redhat-8-4-amd64-sap-applications-4, ibm-redhat-8-6-amd64-sap-applications-2.
 # The list of available VPC Operating Systems supported by SAP: SAP note '2927211 - SAP Applications on IBM Virtual Private Cloud (VPC) Infrastructure environment' https://launchpad.support.sap.com/#/notes/2927211; The list of all available OS images: https://cloud.ibm.com/docs/vpc?topic=vpc-about-images
 # Example: APP-IMAGE = "ibm-redhat-8-4-amd64-sap-applications-4" 
 ```
@@ -259,10 +259,10 @@ SUBNET | The name of an EXISTING Subnet. The list of Subnets is available [here]
 SECURITY_GROUP | The name of an EXISTING Security group. The list of Security Groups is available [here](https://cloud.ibm.com/vpc-ext/network/securityGroups).
 DB-HOSTNAME | The Hostname for the DB VSI. The hostname must have up to 13 characters as required by SAP. For more information on rules regarding hostnames for SAP systems, check SAP Note *611361 - Hostnames of SAP ABAP Platform servers*
 DB-PROFILE |  The profile used for the DB VSI. A list of profiles is available [here](https://cloud.ibm.com/docs/vpc?topic=vpc-profiles) <br>  For more information about supported DB/OS and IBM Gen 2 Virtual Server Instances (VSI), check [SAP Note 2927211: SAP Applications on IBM Virtual Private Cloud](https://launchpad.support.sap.com/#/notes/2927211) <br /> Default value: "bx2-4x16"
-DB-IMAGE | The OS image used for the VSI. A list of images is available [here](https://cloud.ibm.com/docs/vpc?topic=vpc-about-images).<br /> Supported images: ibm-sles-15-3-amd64-sap-applications-5, ibm-redhat-8-4-amd64-sap-applications-4, ibm-redhat-7-6-amd64-sap-applications-3. Default value: ibm-redhat-8-4-amd64-sap-applications-4
+DB-IMAGE | The OS image used for the VSI. A list of images is available [here](https://cloud.ibm.com/docs/vpc?topic=vpc-about-images).<br /> Supported images: ibm-sles-15-3-amd64-sap-applications-5, ibm-sles-15-4-amd64-sap-applications-4, ibm-redhat-8-4-amd64-sap-applications-4, ibm-redhat-8-6-amd64-sap-applications-2. Default value: ibm-redhat-8-6-amd64-sap-applications-2
 APP-HOSTNAME | The Hostname for the DB VSI. The hostname must have up to 13 characters as required by SAP. For more information on rules regarding hostnames for SAP systems, check SAP Note *611361 - Hostnames of SAP ABAP Platform servers*
 APP-PROFILE |  The profile used for the APP VSI. A list of profiles is available [here](https://cloud.ibm.com/docs/vpc?topic=vpc-profiles) <br>  For more information about supported DB/OS and IBM Gen 2 Virtual Server Instances (VSI), check [SAP Note 2927211: SAP Applications on IBM Virtual Private Cloud](https://launchpad.support.sap.com/#/notes/2927211) <br /> Default value: "bx2-4x16"
-APP-IMAGE | The OS image used for the APP VSI. A list of images is available [here](https://cloud.ibm.com/docs/vpc?topic=vpc-about-images).<br /> Supported images: ibm-sles-15-3-amd64-sap-applications-5, ibm-redhat-8-4-amd64-sap-applications-4, ibm-redhat-7-6-amd64-sap-applications-3. Default value: ibm-redhat-8-4-amd64-sap-applications-4
+APP-IMAGE | The OS image used for the APP VSI. A list of images is available [here](https://cloud.ibm.com/docs/vpc?topic=vpc-about-images).<br /> Supported images: ibm-sles-15-3-amd64-sap-applications-5, ibm-sles-15-4-amd64-sap-applications-4, ibm-redhat-8-4-amd64-sap-applications-4, ibm-redhat-8-6-amd64-sap-applications-2. Default value: ibm-redhat-8-6-amd64-sap-applications-2
 
 **SAP input parameters**
 
@@ -315,8 +315,8 @@ kit_sapexedb_file | Path to SAP Kernel DB archive (SAR) | As downloaded from SAP
 kit_igsexe_file | Path to IGS archive (SAR) | As downloaded from SAP Support Portal
 kit_igshelper_file | Path to IGS Helper archive (SAR) | As downloaded from SAP Support Portal
 kit_export_dir | Path to NW 7.5 Installation Export dir | The archive downloaded from SAP Support Portal must be extracted and the path provided to this parameter must contain LABEL.ASC file
-kit_db2_dir | Path to DB2 LUW 11.5 MP6 FP0 SAP2 Linux on x86_64 64bit dir for Red Hat 8.4 and Suse 15 SP3 and path to DB2 LUW 10.5 FP7SAP2 Linux on x86_64 64bit dir for Red Hat 7.6 | The archive downloaded from SAP Support Portal must be extracted and the path provided to this parameter must contain LABEL.ASC file. Default value: /storage/NW75DB2/51055138/DB2_FOR_LUW_11.5_MP6_FP0SAP2_LINUX_
-kit_db2client_dir | Path to DB2 LUW 11.5 MP6 FP0 SAP2 RDBMS Client dir for Red Hat 8.4 and Suse 15 SP3 and path to DB2 LUW 10.5 FP7SAP2 RDBMS Client dir for Red Hat 7.6 | The archive downloaded from SAP Support Portal must be extracted and the path provided to this parameter must contain LABEL.ASC file. Default value: /storage/NW75DB2/51055140
+kit_db2_dir | Path to DB2 LUW 11.5 MP6 FP0 SAP2 Linux on x86_64 64bit dir for Red Hat 8.4, 8.6 and Suse 15 SP3, SP4 | The archive downloaded from SAP Support Portal must be extracted and the path provided to this parameter must contain LABEL.ASC file. Default value: /storage/NW75DB2/51055138/DB2_FOR_LUW_11.5_MP6_FP0SAP2_LINUX_
+kit_db2client_dir | Path to DB2 LUW 11.5 MP6 FP0 SAP2 RDBMS Client dir for Red Hat 8.4, 8.6 and Suse 15 SP3, SP4 | The archive downloaded from SAP Support Portal must be extracted and the path provided to this parameter must contain LABEL.ASC file. Default value: /storage/NW75DB2/51055140
 
 **Obs***: <br />
 - Sensitive - The variable value is not displayed in your tf files details after terrafrorm plan&apply commands.<br />

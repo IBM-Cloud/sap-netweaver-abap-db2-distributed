@@ -49,8 +49,8 @@ DB-HOSTNAME = ""
 DB-PROFILE = "bx2-4x16"
 # The DB VSI profile. Supported profiles for DB VSI: bx2-4x16. The list of available profiles: https://cloud.ibm.com/docs/vpc?topic=vpc-profiles&interface=ui
 
-DB-IMAGE = "ibm-redhat-8-4-amd64-sap-applications-4"
-# OS image for DB VSI. Supported OS images for DB VSIs: ibm-sles-15-3-amd64-sap-applications-5, ibm-redhat-8-4-amd64-sap-applications-4, ibm-redhat-7-6-amd64-sap-applications-3.
+DB-IMAGE = "ibm-redhat-8-6-amd64-sap-applications-2"
+# OS image for DB VSI. Supported OS images for DB VSIs: ibm-sles-15-3-amd64-sap-applications-5, ibm-sles-15-4-amd64-sap-applications-4, ibm-redhat-8-4-amd64-sap-applications-4, ibm-redhat-8-6-amd64-sap-applications-2.
 # The list of available VPC Operating Systems supported by SAP: SAP note '2927211 - SAP Applications on IBM Virtual Private Cloud (VPC) Infrastructure environment' https://launchpad.support.sap.com/#/notes/2927211; The list of all available OS images: https://cloud.ibm.com/docs/vpc?topic=vpc-about-images
 # Example: DB-IMAGE = "ibm-redhat-8-4-amd64-sap-applications-4" 
 
@@ -65,8 +65,8 @@ APP-HOSTNAME = ""
 APP-PROFILE = "bx2-4x16"
 # The APP VSI profile. Supported profiles: bx2-4x16. The list of available profiles: https://cloud.ibm.com/docs/vpc?topic=vpc-profiles&interface=ui
 
-APP-IMAGE = "ibm-redhat-8-4-amd64-sap-applications-4"
-# OS image for SAP APP VSI. Supported OS images for APP VSIs: ibm-sles-15-3-amd64-sap-applications-5, ibm-redhat-8-4-amd64-sap-applications-4, ibm-redhat-7-6-amd64-sap-applications-3.
+APP-IMAGE = "ibm-redhat-8-6-amd64-sap-applications-2"
+# OS image for SAP APP VSI. Supported OS images for APP VSIs: ibm-sles-15-3-amd64-sap-applications-5, ibm-sles-15-4-amd64-sap-applications-4, ibm-redhat-8-4-amd64-sap-applications-4, ibm-redhat-8-6-amd64-sap-applications-2.
 # The list of available VPC Operating Systems supported by SAP: SAP note '2927211 - SAP Applications on IBM Virtual Private Cloud (VPC) Infrastructure environment' https://launchpad.support.sap.com/#/notes/2927211; The list of all available OS images: https://cloud.ibm.com/docs/vpc?topic=vpc-about-images
 # Example: APP-IMAGE = "ibm-redhat-8-4-amd64-sap-applications-4" 
 
