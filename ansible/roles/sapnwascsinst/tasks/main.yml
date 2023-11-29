@@ -9,7 +9,7 @@
 
 - name: Check if SAP was already installed
   stat:
-    path: "/sapmnt/{{ sap_sid|upper }}/exe/uc/linuxx86_64/SAPCAR"
+    path: "/sapmnt/{{ SAP_SID|upper }}/exe/uc/linuxx86_64/SAPCAR"
   register: install_status_app_asc
 
 - name: Start SAP installation

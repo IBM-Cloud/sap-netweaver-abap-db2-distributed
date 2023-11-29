@@ -33,7 +33,7 @@
 
 - name: Create a volume group for swap
   lvg:
-    vg: "{{ sap_sid|lower }}_swap_vg"
+    vg: "{{ SAP_SID|lower }}_swap_vg"
     pvs: "/dev/{{ swap_disk }}"
     pesize: "32"
 
@@ -59,7 +59,7 @@
 
 - name: Create a volume group for SAP instance
   lvg:
-    vg: "{{ sap_sid|lower }}_app_vg"
+    vg: "{{ SAP_SID|lower }}_app_vg"
     pvs: "/dev/{{ sap_disk }}"
     pesize: "32"
 
@@ -85,7 +85,7 @@
 
 - name: Create a volume group for DB2 data
   lvg:
-    vg: "{{ sap_sid|lower }}_data_vg"
+    vg: "{{ SAP_SID|lower }}_data_vg"
     pvs: "/dev/{{ data_disk }}"
     pesize: "32"
 
@@ -111,7 +111,7 @@
 
 - name: Create a volume group for DB2 logs
   lvg:
-    vg: "{{ sap_sid|lower }}_log_vg"
+    vg: "{{ SAP_SID|lower }}_log_vg"
     pvs: "/dev/{{ log_disk }}"
     pesize: "32"
 
@@ -137,7 +137,7 @@
 
 - name: Create a volume group for DB2 log archives
   lvg:
-    vg: "{{ sap_sid|lower }}_arch_vg"
+    vg: "{{ SAP_SID|lower }}_arch_vg"
     pvs: "/dev/{{ arch_disk }}"
     pesize: "32"
 
@@ -168,174 +168,174 @@
 
 - name: Create a logical volume for swap
   lvol:
-    vg: "{{ sap_sid|lower }}_swap_vg"
-    lv: "{{ sap_sid|lower }}_swap_lv"
+    vg: "{{ SAP_SID|lower }}_swap_vg"
+    lv: "{{ SAP_SID|lower }}_swap_lv"
     size: "{{ swap_lv_size }}"
 
 - name: Create a logical volume for /usr/sap
   lvol:
-    vg: "{{ sap_sid|lower }}_app_vg"
-    lv: "{{ sap_sid|lower }}_usrsap_lv"
+    vg: "{{ SAP_SID|lower }}_app_vg"
+    lv: "{{ SAP_SID|lower }}_usrsap_lv"
     size: "{{ sap_lv_size }}"
 
-- name: Create a logical volume for /db2/db2{{ sap_sid|lower }}
+- name: Create a logical volume for /db2/db2{{ SAP_SID|lower }}
   lvol:
-    vg: "{{ sap_sid|lower }}_data_vg"
-    lv: "{{ sap_sid|lower }}_db2software_lv"
+    vg: "{{ SAP_SID|lower }}_data_vg"
+    lv: "{{ SAP_SID|lower }}_db2software_lv"
     size: "{{ db2software_lv_size }}"
 
-- name: Create a logical volume for /db2/{{ sap_sid|upper }}
+- name: Create a logical volume for /db2/{{ SAP_SID|upper }}
   lvol:
-    vg: "{{ sap_sid|lower }}_data_vg"
-    lv: "{{ sap_sid|lower }}_db2_lv"
+    vg: "{{ SAP_SID|lower }}_data_vg"
+    lv: "{{ SAP_SID|lower }}_db2_lv"
     size: "{{ db2_lv_size }}"
 
-- name: Create a logical volume for /db2/{{ sap_sid|upper }}/db2dump
+- name: Create a logical volume for /db2/{{ SAP_SID|upper }}/db2dump
   lvol:
-    vg: "{{ sap_sid|lower }}_data_vg"
-    lv: "{{ sap_sid|lower }}_db2dump_lv"
+    vg: "{{ SAP_SID|lower }}_data_vg"
+    lv: "{{ SAP_SID|lower }}_db2dump_lv"
     size: "{{ db2dump_lv_size }}"
 
-- name: Create a logical volume for /db2/{{ sap_sid|upper }}/sapdata1
+- name: Create a logical volume for /db2/{{ SAP_SID|upper }}/sapdata1
   lvol:
-    vg: "{{ sap_sid|lower }}_data_vg"
-    lv: "{{ sap_sid|lower }}_sapdata1_lv"
+    vg: "{{ SAP_SID|lower }}_data_vg"
+    lv: "{{ SAP_SID|lower }}_sapdata1_lv"
     size: "{{ sapdata1_lv_size }}"
 
-- name: Create a logical volume for /db2/{{ sap_sid|upper }}/sapdata2
+- name: Create a logical volume for /db2/{{ SAP_SID|upper }}/sapdata2
   lvol:
-    vg: "{{ sap_sid|lower }}_data_vg"
-    lv: "{{ sap_sid|lower }}_sapdata2_lv"
+    vg: "{{ SAP_SID|lower }}_data_vg"
+    lv: "{{ SAP_SID|lower }}_sapdata2_lv"
     size: "{{ sapdata2_lv_size }}"         
 
-- name: Create a logical volume for /db2/{{ sap_sid|upper }}/sapdata3
+- name: Create a logical volume for /db2/{{ SAP_SID|upper }}/sapdata3
   lvol:
-    vg: "{{ sap_sid|lower }}_data_vg"
-    lv: "{{ sap_sid|lower }}_sapdata3_lv"
+    vg: "{{ SAP_SID|lower }}_data_vg"
+    lv: "{{ SAP_SID|lower }}_sapdata3_lv"
     size: "{{ sapdata3_lv_size }}"
 
-- name: Create a logical volume for /db2/{{ sap_sid|upper }}/sapdata4
+- name: Create a logical volume for /db2/{{ SAP_SID|upper }}/sapdata4
   lvol:
-    vg: "{{ sap_sid|lower }}_data_vg"
-    lv: "{{ sap_sid|lower }}_sapdata4_lv"
+    vg: "{{ SAP_SID|lower }}_data_vg"
+    lv: "{{ SAP_SID|lower }}_sapdata4_lv"
     size: "{{ sapdata4_lv_size }}"
 
-- name: Create a logical volume for /db2/{{ sap_sid|upper }}/saptmp1
+- name: Create a logical volume for /db2/{{ SAP_SID|upper }}/saptmp1
   lvol:
-    vg: "{{ sap_sid|lower }}_data_vg"
-    lv: "{{ sap_sid|lower }}_saptmp1_lv"
+    vg: "{{ SAP_SID|lower }}_data_vg"
+    lv: "{{ SAP_SID|lower }}_saptmp1_lv"
     size: "{{ saptmp1_lv_size }}"
 
-- name: Create a logical volume for /db2/{{ sap_sid|upper }}/saptmp2
+- name: Create a logical volume for /db2/{{ SAP_SID|upper }}/saptmp2
   lvol:
-    vg: "{{ sap_sid|lower }}_data_vg"
-    lv: "{{ sap_sid|lower }}_saptmp2_lv"
+    vg: "{{ SAP_SID|lower }}_data_vg"
+    lv: "{{ SAP_SID|lower }}_saptmp2_lv"
     size: "{{ saptmp2_lv_size }}"
 
-- name: Create a logical volume for /db2/{{ sap_sid|upper }}/saptmp3
+- name: Create a logical volume for /db2/{{ SAP_SID|upper }}/saptmp3
   lvol:
-    vg: "{{ sap_sid|lower }}_data_vg"
-    lv: "{{ sap_sid|lower }}_saptmp3_lv"
+    vg: "{{ SAP_SID|lower }}_data_vg"
+    lv: "{{ SAP_SID|lower }}_saptmp3_lv"
     size: "{{ saptmp3_lv_size }}"
 
-- name: Create a logical volume for /db2/{{ sap_sid|upper }}/saptmp4
+- name: Create a logical volume for /db2/{{ SAP_SID|upper }}/saptmp4
   lvol:
-    vg: "{{ sap_sid|lower }}_data_vg"
-    lv: "{{ sap_sid|lower }}_saptmp4_lv"
+    vg: "{{ SAP_SID|lower }}_data_vg"
+    lv: "{{ SAP_SID|lower }}_saptmp4_lv"
     size: "{{ saptmp4_lv_size }}"
 
-- name: Create a logical volume for /db2/{{ sap_sid|upper }}/log_dir
+- name: Create a logical volume for /db2/{{ SAP_SID|upper }}/log_dir
   lvol:
-    vg: "{{ sap_sid|lower }}_log_vg"
-    lv: "{{ sap_sid|lower }}_log_lv"
+    vg: "{{ SAP_SID|lower }}_log_vg"
+    lv: "{{ SAP_SID|lower }}_log_lv"
     size: "{{ log_lv_size }}"
 
-- name: Create a logical volume for /db2/{{ sap_sid|upper }}/log_archive
+- name: Create a logical volume for /db2/{{ SAP_SID|upper }}/log_archive
   lvol:
-    vg: "{{ sap_sid|lower }}_arch_vg"
-    lv: "{{ sap_sid|lower }}_archlog_lv"
+    vg: "{{ SAP_SID|lower }}_arch_vg"
+    lv: "{{ SAP_SID|lower }}_archlog_lv"
     size: "{{ archlog_lv_size }}"
     
 - name: Create a swap filesystem
   filesystem:
     fstype: swap
-    dev: "/dev/{{ sap_sid|lower }}_swap_vg/{{ sap_sid|lower }}_swap_lv"
+    dev: "/dev/{{ SAP_SID|lower }}_swap_vg/{{ SAP_SID|lower }}_swap_lv"
 
 - name: Create filesystem for /usr/sap
   filesystem:
     fstype: ext4
-    dev: "/dev/{{ sap_sid|lower }}_app_vg/{{ sap_sid|lower }}_usrsap_lv"
+    dev: "/dev/{{ SAP_SID|lower }}_app_vg/{{ SAP_SID|lower }}_usrsap_lv"
 
-- name: Create filesystem for /db2/db2{{ sap_sid|lower }}
+- name: Create filesystem for /db2/db2{{ SAP_SID|lower }}
   filesystem:
     fstype: ext4
-    dev: "/dev/{{ sap_sid|lower }}_data_vg/{{ sap_sid|lower }}_db2software_lv"
+    dev: "/dev/{{ SAP_SID|lower }}_data_vg/{{ SAP_SID|lower }}_db2software_lv"
 
-- name: Create filesystem for /db2/{{ sap_sid|upper }}
+- name: Create filesystem for /db2/{{ SAP_SID|upper }}
   filesystem:
     fstype: ext4
-    dev: "/dev/{{ sap_sid|lower }}_data_vg/{{ sap_sid|lower }}_db2_lv"
+    dev: "/dev/{{ SAP_SID|lower }}_data_vg/{{ SAP_SID|lower }}_db2_lv"
 
-- name: Create filesystem for /db2/{{ sap_sid|upper }}/db2dump
+- name: Create filesystem for /db2/{{ SAP_SID|upper }}/db2dump
   filesystem:
     fstype: ext4
-    dev: "/dev/{{ sap_sid|lower }}_data_vg/{{ sap_sid|lower }}_db2dump_lv"
+    dev: "/dev/{{ SAP_SID|lower }}_data_vg/{{ SAP_SID|lower }}_db2dump_lv"
 
-- name: Create filesystem for /db2/{{ sap_sid|upper }}/sapdata1
+- name: Create filesystem for /db2/{{ SAP_SID|upper }}/sapdata1
   filesystem:
     fstype: ext4
-    dev: "/dev/{{ sap_sid|lower }}_data_vg/{{ sap_sid|lower }}_sapdata1_lv"
+    dev: "/dev/{{ SAP_SID|lower }}_data_vg/{{ SAP_SID|lower }}_sapdata1_lv"
 
-- name: Create filesystem for /db2/{{ sap_sid|upper }}/sapdata2
+- name: Create filesystem for /db2/{{ SAP_SID|upper }}/sapdata2
   filesystem:
     fstype: ext4
-    dev: "/dev/{{ sap_sid|lower }}_data_vg/{{ sap_sid|lower }}_sapdata2_lv"
+    dev: "/dev/{{ SAP_SID|lower }}_data_vg/{{ SAP_SID|lower }}_sapdata2_lv"
 
-- name: Create filesystem for /db2/{{ sap_sid|upper }}/sapdata3
+- name: Create filesystem for /db2/{{ SAP_SID|upper }}/sapdata3
   filesystem:
     fstype: ext4
-    dev: "/dev/{{ sap_sid|lower }}_data_vg/{{ sap_sid|lower }}_sapdata3_lv"
+    dev: "/dev/{{ SAP_SID|lower }}_data_vg/{{ SAP_SID|lower }}_sapdata3_lv"
 
-- name: Create filesystem for /db2/{{ sap_sid|upper }}/sapdata4
+- name: Create filesystem for /db2/{{ SAP_SID|upper }}/sapdata4
   filesystem:
     fstype: ext4
-    dev: "/dev/{{ sap_sid|lower }}_data_vg/{{ sap_sid|lower }}_sapdata4_lv"
+    dev: "/dev/{{ SAP_SID|lower }}_data_vg/{{ SAP_SID|lower }}_sapdata4_lv"
 
-- name: Create filesystem for /db2/{{ sap_sid|upper }}/saptmp1
+- name: Create filesystem for /db2/{{ SAP_SID|upper }}/saptmp1
   filesystem:
     fstype: ext4
-    dev: "/dev/{{ sap_sid|lower }}_data_vg/{{ sap_sid|lower }}_saptmp1_lv"
+    dev: "/dev/{{ SAP_SID|lower }}_data_vg/{{ SAP_SID|lower }}_saptmp1_lv"
 
-- name: Create filesystem for /db2/{{ sap_sid|upper }}/saptmp2
+- name: Create filesystem for /db2/{{ SAP_SID|upper }}/saptmp2
   filesystem:
     fstype: ext4
-    dev: "/dev/{{ sap_sid|lower }}_data_vg/{{ sap_sid|lower }}_saptmp2_lv"
+    dev: "/dev/{{ SAP_SID|lower }}_data_vg/{{ SAP_SID|lower }}_saptmp2_lv"
 
-- name: Create filesystem for /db2/{{ sap_sid|upper }}/saptmp3
+- name: Create filesystem for /db2/{{ SAP_SID|upper }}/saptmp3
   filesystem:
     fstype: ext4
-    dev: "/dev/{{ sap_sid|lower }}_data_vg/{{ sap_sid|lower }}_saptmp3_lv"
+    dev: "/dev/{{ SAP_SID|lower }}_data_vg/{{ SAP_SID|lower }}_saptmp3_lv"
 
-- name: Create filesystem for /db2/{{ sap_sid|upper }}/saptmp4
+- name: Create filesystem for /db2/{{ SAP_SID|upper }}/saptmp4
   filesystem:
     fstype: ext4
-    dev: "/dev/{{ sap_sid|lower }}_data_vg/{{ sap_sid|lower }}_saptmp4_lv"
+    dev: "/dev/{{ SAP_SID|lower }}_data_vg/{{ SAP_SID|lower }}_saptmp4_lv"
 
-- name: Create filesystem for /db2/{{ sap_sid|upper }}/log_dir
+- name: Create filesystem for /db2/{{ SAP_SID|upper }}/log_dir
   filesystem:
     fstype: ext4
-    dev: "/dev/{{ sap_sid|lower }}_log_vg/{{ sap_sid|lower }}_log_lv"
+    dev: "/dev/{{ SAP_SID|lower }}_log_vg/{{ SAP_SID|lower }}_log_lv"
 
-- name: Create filesystem for /db2/{{ sap_sid|upper }}/log_archive
+- name: Create filesystem for /db2/{{ SAP_SID|upper }}/log_archive
   filesystem:
     fstype: ext4
-    dev: "/dev/{{ sap_sid|lower }}_arch_vg/{{ sap_sid|lower }}_archlog_lv"
+    dev: "/dev/{{ SAP_SID|lower }}_arch_vg/{{ SAP_SID|lower }}_archlog_lv"
 
 - name: Add swap device to /etc/fstab
   lineinfile:
     path: /etc/fstab
-    regexp: "^/dev/{{ sap_sid|lower }}_swap_vg/{{ sap_sid|lower }}_swap_lv"
-    line: "/dev/{{ sap_sid|lower }}_swap_vg/{{ sap_sid|lower }}_swap_lv  swap  swap  defaults  0 0"
+    regexp: "^/dev/{{ SAP_SID|lower }}_swap_vg/{{ SAP_SID|lower }}_swap_lv"
+    line: "/dev/{{ SAP_SID|lower }}_swap_vg/{{ SAP_SID|lower }}_swap_lv  swap  swap  defaults  0 0"
 
 - name: Check the current swap size
   set_fact:
@@ -348,111 +348,111 @@
 - name: Mount /usr/sap and add it to /etc/fstab
   mount:
     path: "/usr/sap"
-    src: "/dev/{{ sap_sid|lower }}_app_vg/{{ sap_sid|lower }}_usrsap_lv"
+    src: "/dev/{{ SAP_SID|lower }}_app_vg/{{ SAP_SID|lower }}_usrsap_lv"
     fstype: ext4
     state: mounted
 
-- name: Mount /db2/db2{{ sap_sid|lower }} and add it to /etc/fstab
+- name: Mount /db2/db2{{ SAP_SID|lower }} and add it to /etc/fstab
   mount:
-    path: "/db2/db2{{ sap_sid|lower }}"
-    src: "/dev/{{ sap_sid|lower }}_data_vg/{{ sap_sid|lower }}_db2software_lv"
+    path: "/db2/db2{{ SAP_SID|lower }}"
+    src: "/dev/{{ SAP_SID|lower }}_data_vg/{{ SAP_SID|lower }}_db2software_lv"
     fstype: ext4
     state: mounted
 
-- name: Mount /db2/{{ sap_sid|upper }} and add it to /etc/fstab
+- name: Mount /db2/{{ SAP_SID|upper }} and add it to /etc/fstab
   mount:
-    path: "/db2/{{ sap_sid|upper }}"
-    src: "/dev/{{ sap_sid|lower }}_data_vg/{{ sap_sid|lower }}_db2_lv"
+    path: "/db2/{{ SAP_SID|upper }}"
+    src: "/dev/{{ SAP_SID|lower }}_data_vg/{{ SAP_SID|lower }}_db2_lv"
     fstype: ext4
     state: mounted
 
-- name: Mount /db2/{{ sap_sid|upper }}/db2dump and add it to /etc/fstab
+- name: Mount /db2/{{ SAP_SID|upper }}/db2dump and add it to /etc/fstab
   mount:
-    path: "/db2/{{ sap_sid|upper }}/db2dump"
-    src: "/dev/{{ sap_sid|lower }}_data_vg/{{ sap_sid|lower }}_db2dump_lv"
+    path: "/db2/{{ SAP_SID|upper }}/db2dump"
+    src: "/dev/{{ SAP_SID|lower }}_data_vg/{{ SAP_SID|lower }}_db2dump_lv"
     fstype: ext4
     state: mounted
 
-- name: Mount /db2/{{ sap_sid|upper }}/sapdata1 and add it to /etc/fstab
+- name: Mount /db2/{{ SAP_SID|upper }}/sapdata1 and add it to /etc/fstab
   mount:
-    path: "/db2/{{ sap_sid|upper }}/sapdata1"
-    src: "/dev/{{ sap_sid|lower }}_data_vg/{{ sap_sid|lower }}_sapdata1_lv"
+    path: "/db2/{{ SAP_SID|upper }}/sapdata1"
+    src: "/dev/{{ SAP_SID|lower }}_data_vg/{{ SAP_SID|lower }}_sapdata1_lv"
     fstype: ext4
     state: mounted
 
-- name: Mount /db2/{{ sap_sid|upper }}/sapdata2 and add it to /etc/fstab
+- name: Mount /db2/{{ SAP_SID|upper }}/sapdata2 and add it to /etc/fstab
   mount:
-    path: "/db2/{{ sap_sid|upper }}/sapdata2"
-    src: "/dev/{{ sap_sid|lower }}_data_vg/{{ sap_sid|lower }}_sapdata2_lv"
+    path: "/db2/{{ SAP_SID|upper }}/sapdata2"
+    src: "/dev/{{ SAP_SID|lower }}_data_vg/{{ SAP_SID|lower }}_sapdata2_lv"
     fstype: ext4
     state: mounted
 
-- name: Mount /db2/{{ sap_sid|upper }}/sapdata3 and add it to /etc/fstab
+- name: Mount /db2/{{ SAP_SID|upper }}/sapdata3 and add it to /etc/fstab
   mount:
-    path: "/db2/{{ sap_sid|upper }}/sapdata3"
-    src: "/dev/{{ sap_sid|lower }}_data_vg/{{ sap_sid|lower }}_sapdata3_lv"
+    path: "/db2/{{ SAP_SID|upper }}/sapdata3"
+    src: "/dev/{{ SAP_SID|lower }}_data_vg/{{ SAP_SID|lower }}_sapdata3_lv"
     fstype: ext4
     state: mounted
 
-- name: Mount /db2/{{ sap_sid|upper }}/sapdata4 and add it to /etc/fstab
+- name: Mount /db2/{{ SAP_SID|upper }}/sapdata4 and add it to /etc/fstab
   mount:
-    path: "/db2/{{ sap_sid|upper }}/sapdata4"
-    src: "/dev/{{ sap_sid|lower }}_data_vg/{{ sap_sid|lower }}_sapdata4_lv"
+    path: "/db2/{{ SAP_SID|upper }}/sapdata4"
+    src: "/dev/{{ SAP_SID|lower }}_data_vg/{{ SAP_SID|lower }}_sapdata4_lv"
     fstype: ext4
     state: mounted
 
-- name: Mount /db2/{{ sap_sid|upper }}/saptmp1 and add it to /etc/fstab
+- name: Mount /db2/{{ SAP_SID|upper }}/saptmp1 and add it to /etc/fstab
   mount:
-    path: "/db2/{{ sap_sid|upper }}/saptmp1"
-    src: "/dev/{{ sap_sid|lower }}_data_vg/{{ sap_sid|lower }}_saptmp1_lv"
+    path: "/db2/{{ SAP_SID|upper }}/saptmp1"
+    src: "/dev/{{ SAP_SID|lower }}_data_vg/{{ SAP_SID|lower }}_saptmp1_lv"
     fstype: ext4
     state: mounted
 
-- name: Mount /db2/{{ sap_sid|upper }}/saptmp2 and add it to /etc/fstab
+- name: Mount /db2/{{ SAP_SID|upper }}/saptmp2 and add it to /etc/fstab
   mount:
-    path: "/db2/{{ sap_sid|upper }}/saptmp2"
-    src: "/dev/{{ sap_sid|lower }}_data_vg/{{ sap_sid|lower }}_saptmp2_lv"
+    path: "/db2/{{ SAP_SID|upper }}/saptmp2"
+    src: "/dev/{{ SAP_SID|lower }}_data_vg/{{ SAP_SID|lower }}_saptmp2_lv"
     fstype: ext4
     state: mounted
 
-- name: Mount /db2/{{ sap_sid|upper }}/saptmp3 and add it to /etc/fstab
+- name: Mount /db2/{{ SAP_SID|upper }}/saptmp3 and add it to /etc/fstab
   mount:
-    path: "/db2/{{ sap_sid|upper }}/saptmp3"
-    src: "/dev/{{ sap_sid|lower }}_data_vg/{{ sap_sid|lower }}_saptmp3_lv"
+    path: "/db2/{{ SAP_SID|upper }}/saptmp3"
+    src: "/dev/{{ SAP_SID|lower }}_data_vg/{{ SAP_SID|lower }}_saptmp3_lv"
     fstype: ext4
     state: mounted
 
-- name: Mount /db2/{{ sap_sid|upper }}/saptmp4 and add it to /etc/fstab
+- name: Mount /db2/{{ SAP_SID|upper }}/saptmp4 and add it to /etc/fstab
   mount:
-    path: "/db2/{{ sap_sid|upper }}/saptmp4"
-    src: "/dev/{{ sap_sid|lower }}_data_vg/{{ sap_sid|lower }}_saptmp4_lv"
+    path: "/db2/{{ SAP_SID|upper }}/saptmp4"
+    src: "/dev/{{ SAP_SID|lower }}_data_vg/{{ SAP_SID|lower }}_saptmp4_lv"
     fstype: ext4
     state: mounted
 
-- name: Mount /db2/{{ sap_sid|upper }}/log_dir and add it to /etc/fstab
+- name: Mount /db2/{{ SAP_SID|upper }}/log_dir and add it to /etc/fstab
   mount:
-    path: "/db2/{{ sap_sid|upper }}/log_dir"
-    src: "/dev/{{ sap_sid|lower }}_log_vg/{{ sap_sid|lower }}_log_lv"
+    path: "/db2/{{ SAP_SID|upper }}/log_dir"
+    src: "/dev/{{ SAP_SID|lower }}_log_vg/{{ SAP_SID|lower }}_log_lv"
     fstype: ext4
     state: mounted
 
-- name: Mount /db2/{{ sap_sid|upper }}/log_archive and add it to /etc/fstab
+- name: Mount /db2/{{ SAP_SID|upper }}/log_archive and add it to /etc/fstab
   mount:
-    path: "/db2/{{ sap_sid|upper }}/log_archive"
-    src: "/dev/{{ sap_sid|lower }}_arch_vg/{{ sap_sid|lower }}_archlog_lv"
+    path: "/db2/{{ SAP_SID|upper }}/log_archive"
+    src: "/dev/{{ SAP_SID|lower }}_arch_vg/{{ SAP_SID|lower }}_archlog_lv"
     fstype: ext4
     state: mounted
 
-- name: Create /sapmnt/{{ sap_sid|upper }} directory
+- name: Create /sapmnt/{{ SAP_SID|upper }} directory
   file:
-    path: "/sapmnt/{{ sap_sid|upper }}"
+    path: "/sapmnt/{{ SAP_SID|upper }}"
     state: directory
     mode: 0775
 
-- name: Mount /sapmnt/{{ sap_sid|upper }} and add it to /etc/fstab
+- name: Mount /sapmnt/{{ SAP_SID|upper }} and add it to /etc/fstab
   mount:
-    path: "/sapmnt/{{ sap_sid|upper }}"
-    src: "{{ sap_host }}:/sapmnt/{{ sap_sid|upper }}"
+    path: "/sapmnt/{{ SAP_SID|upper }}"
+    src: "{{ sap_host }}:/sapmnt/{{ SAP_SID|upper }}"
     fstype: nfs
     state: mounted
 ...

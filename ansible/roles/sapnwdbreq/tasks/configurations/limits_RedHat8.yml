@@ -15,10 +15,10 @@
   loop_control:
     loop_var: ltype
 
-- name: Set nofile limit for db{{ sap_sid|lower }}adm group
+- name: Set nofile limit for db{{ SAP_SID|lower }}adm group
   pam_limits:
     dest: /etc/security/limits.d/99-sap.conf
-    domain: "@db{{ sap_sid|lower }}adm"
+    domain: "@db{{ SAP_SID|lower }}adm"
     limit_item: nofile
     limit_type: "{{ ltype }}"
     value: "1048576"
@@ -41,10 +41,10 @@
   loop_control:
     loop_var: ltype
 
-- name: Set nproc limit for db{{ sap_sid|lower }}adm group
+- name: Set nproc limit for db{{ SAP_SID|lower }}adm group
   pam_limits:
     dest: /etc/security/limits.d/99-sap.conf
-    domain: "@db{{ sap_sid|lower }}adm"
+    domain: "@db{{ SAP_SID|lower }}adm"
     limit_item: nproc
     limit_type: "{{ ltype }}"
     value: unlimited

@@ -3,7 +3,7 @@
   lineinfile:
     path: /etc/exports
     state: present
-    line: "/sapmnt/{{ sap_sid|upper }} *(rw,no_root_squash)"
+    line: "/sapmnt/{{ SAP_SID|upper }} *(rw,no_root_squash)"
 
 - name: Enable and start nfs server
   systemd:

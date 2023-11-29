@@ -9,7 +9,7 @@
 
 - name: Check if SAP was already installed
   stat:
-    path: "/usr/sap/{{ sap_sid|upper }}/D{{ sap_ci_instance_number }}/exe/db6util"
+    path: "/usr/sap/{{ SAP_SID|upper }}/D{{ SAP_CI_INSTANCE_NUMBER }}/exe/db6util"
   register: install_status_app
 
 - name: Start SAP installation
